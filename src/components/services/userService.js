@@ -18,8 +18,8 @@ class UserService {
     console.log("teste");
     try {
       const response = await axios.post(`${API_URL}/users/auth`, { email, password });
-      if (response.data.id) {
-        await AsyncStorage.setItem('userId', response.data.user.id.toString());
+      if (response.data.user._id) {
+        await AsyncStorage.setItem('userId', response.data.user._id);
       }
       return response.data;
     } catch (error) {

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../../config';
+import UserService from './userService';
 
 const API_URL = config.API_URL;
 
@@ -7,7 +8,7 @@ class ProductService {
 
     static async create(product) {
         try {
-            product.userId = UserService.getUserId();
+            product.userId = await UserService.getUserId();
             const response = await axios.post(`${API_URL}/products`, product);
             return response.data;
         } catch (error) {
@@ -27,7 +28,7 @@ class ProductService {
 
     static async update(id, product) {
         try {
-            product.userId = UserService.getUserId();
+            product.userId = await UserService.getUserId();
             const response = await axios.put(`${API_URL}/products/${id}`, product);
             return response.data;
         } catch (error) {
@@ -37,6 +38,7 @@ class ProductService {
 
     static async delete(id) {
         try {
+            console.log("Teste delecao: ", id)
             const response = await axios.delete(`${API_URL}/products/${id}`);
             return response.data;
         } catch (error) {
